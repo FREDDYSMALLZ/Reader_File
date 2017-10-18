@@ -1,29 +1,47 @@
 import java.util.Scanner;
 public class Main {
 
+    public Main() {
+        super();
+    }
+
     public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);//Gets input from the user
 
-        int videoLength; //In seconds
-        int videoQuality; //720p or 1080p
+        Scanner input = new Scanner(System.in);
 
-        System.out.println("Please Enter  the video size: ");
+        int videoLength;
+        int videoQuality;
+        double storage_capacity;
+        double quality;
+
+         //Prompts the user to enter the length or the video running time.
+        System.out.println("Please Enter the total video running time in minutes: ");
         videoLength = input.nextInt();
+        Video_File_Reader.getVideoLength(videoLength);
 
-        Video_File_Reader.getVideoLength(videoLength); //videoLength accessor method
+        System.out.println("Please choose (1) = 720 "+ "or (2) = 1080");
+            double MB;
+            double GB;
+            if(videoQuality == 1){
+                quality = 0.5 * videoLength;
+                MB = quality;
+                GB = 1000 / MB;
 
-        System.out.println("Is video quality 720p or 1080p?");
-        System.out.println("(1) = 720\t (2) = 1080");
-        System.out.println("Quality: ");
-        videoQuality = input.nextInt();
+                System.out.println("Video Quality: 720p\nVideo Length: " +
+                        videoLength + "s = " + MB + " Megabytes (" + GB + " Gigabytes.");
+            }
+            else if(videoQuality == 2){
+                quality = 1.2 * videoLength;
+                MB = quality;
+                GB = 1024 / MB;
 
-        Video_File_Reader.getVideoQuality(videoQuality);//videoQuality accessor method
+                System.out.println("Video Quality: 1080p\nVideo Length: " +
+                        videoLength + "s = " + MB + " Megabytes (" + MB + " Gigabytes.");
 
-        Video_File_Reader videoSize = new Video_File_Reader();
-        /**CAN NOT RESOLVE THIS METHOD: I am attempting to display
-         * the video size text from the VideoReader Class.*/
-        System.out.println(videoQuality);
-
+            }
+            else if(videoLength != 1 || videoLength != 2){
+                System.out.println("The video quality  choice is not valid. Please choose either 1 or 2. ");
+            }
 
     }
 }

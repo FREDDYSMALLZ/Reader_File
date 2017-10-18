@@ -1,51 +1,76 @@
+/*Create a bean that calculates the total storage needed for a video file.
+*The input values are the video quality (720p or 1080p) and duration in seconds.
+*The bean will calculate and display the storage requirements in MB and GB.
+*Create an application that uses the bean and displays the results.
+*Note that this is a server-only application.
+*/
+
 import java.io.Serializable;
+/*
+Creating a simple bean with all the Java Bean properties
+such as having private fields, using the accesssor and muatator methods
+Implementing the serializable interface
+No argument constructor
+ */
 
 public class Video_File_Reader implements Serializable{
-    private double videoLength; //In seconds
-    private int videoQuality; //720p or 1080p
+    private double videoLength;
+    private int videoQuality;
+    private double storage_capacity;//Display the total storage required for storage of the video file
 
-    public Video_File_Reader(){   //no argument constructor
-
+    public double getStorage_capacity() {
+        return storage_capacity;
     }
 
-    public static int getVideoLength(int videoLength){ //get Video Length
+    public void setStorage_capacity(double storage_capacity) {
+        this.storage_capacity = storage_capacity;
+    }
+
+    public Video_File_Reader(){
+
+    }
+    //Gets the length of the video file
+    public static int getVideoLength(int videoLength){
+
         return videoLength;
     }
-    public void setVideoLength(){               //set Video Length
+    public void setVideoLength(){
         this.videoLength = videoLength;
     }
 
-
-    public static int getVideoQuality(int videoQuality){ //get Video Quality
+     //Getter for the video quality
+    public static int getVideoQuality(int videoQuality){
         return videoQuality;
     }
 
-    public void setVideoQuality(){               //set Video Quality
+    public void setVideoQuality(){
         this.videoQuality = videoQuality;
     }
 
     public static void size( int videoLength, int videoQuality){
-        double quality, mb, gb;
+        double quality;
+        double MB;
+        double GB;
 
-        if(videoQuality == 1){          //this will test to see which "button" the user selects for video quality
-            quality = 0.5 * videoLength;//in 720p, 1 second of video == 0.5 megabytes of data
-            mb = quality;               //Megabytes: assign quality value
-            gb = 1024 / mb;             //Gigabyte conversion: 1 gigabyte is exactly 1024 megabytes
+        if(videoQuality == 1){
+            quality = 0.5 * videoLength;
+            MB = quality;
+            GB = 1000 / MB;
 
             System.out.println("Video Quality: 720p\nVideo Length: " +
-                    videoLength + "s = " + mb + " Megabytes (" + gb + " Gigabytes.");
+                    videoLength + "s = " + MB + " Megabytes (" + GB + " Gigabytes.");
         }
         else if(videoQuality == 2){
-            quality = 1.2 * videoLength;//in 720p, 1 second of video == 0.5 megabytes of data
-            mb = quality;               //Megabytes: assign quality value
-            gb = 1024 / mb;             //Gigabyte conversion: 1 gigabyte is exactly 1024 megabytes
+            quality = 1.2 * videoLength;
+            MB = quality;
+            GB = 1024 / MB;
 
             System.out.println("Video Quality: 1080p\nVideo Length: " +
-                    videoLength + "s = " + mb + " Megabytes (" + gb + " Gigabytes.");
+                    videoLength + "s = " + MB + " Megabytes (" + MB + " Gigabytes.");
 
         }
         else if(videoLength != 1 || videoLength != 2){
-            System.out.println("INVALID ENTRY! ENTER (1) FOR 720p || (2) FOR 1080p!!");
+            System.out.println("The video quality  choice is not valid. Please choose either 1 or 2. ");
         }
     }
 }
